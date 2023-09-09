@@ -1,2 +1,3 @@
-var asd = 345;
-console.log(asd);
+import { drawMPC } from "./MPC";
+
+drawMPC();

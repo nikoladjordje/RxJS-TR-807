@@ -1,0 +1,9 @@
+.mpc-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.drum-pad {
+  flex: 1 0 20%;
+  margin: 5px;
+}

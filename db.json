@@ -1,0 +1,64 @@
+{
+  "sounds": [
+    {
+      "id": 9,
+      "name": "Kick",
+      "soundPath": "BD1075.WAV"
+    },
+    {
+      "id": 10,
+      "name": "Closedhat",
+      "soundPath": "CH.WAV"
+    },
+    {
+      "id": 11,
+      "name": "Openhat1",
+      "soundPath": "OH75.WAV"
+    },
+    {
+      "id": 12,
+      "name": "Openhat2",
+      "soundPath": "OH25.WAV"
+    },
+    {
+      "id": 5,
+      "name": "Rimshot",
+      "soundPath": "RS.WAV"
+    },
+    {
+      "id": 6,
+      "name": "Snare1",
+      "soundPath": "SD7575.WAV"
+    },
+    {
+      "id": 7,
+      "name": "Snare2",
+      "soundPath": "SD2510.WAV"
+    },
+    {
+      "id": 8,
+      "name": "Clap",
+      "soundPath": "CP.WAV"
+    },
+    {
+      "id": 1,
+      "name": "LowTom",
+      "soundPath": "LT75.WAV"
+    },
+    {
+      "id": 2,
+      "name": "MidTom",
+      "soundPath": "MT75.WAV"
+    },
+    {
+      "id": 3,
+      "name": "HiTom",
+      "soundPath": "HT75.WAV"
+    },
+    {
+      "id": 4,
+      "name": "Cowbell",
+      "soundPath": "CB.WAV"
+    }
+  ]
+}
