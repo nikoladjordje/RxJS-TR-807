@@ -1,3 +1,10 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+.MPC {
+  min-width: 1000px;
+}
 .mpc-container {
   display: flex;
   justify-content: space-between;
@@ -6,4 +13,34 @@
 .drum-pad {
   flex: 1 0 20%;
   margin: 5px;
+  border: 1px solid black;
+  width: 140px;
+  height: 140px;
+}
+.seq-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  max-width: 800px;
+}
+.step {
+  border: 1px solid black;
+  height: 40px;
+  width: 25px;
+  text-align: center;
+}
+.first {
+  background-color: red;
+}
+.second {
+  background-color: orange;
+}
+.third {
+  background-color: yellow;
+}
+.fourth {
+  background-color: white;
+}
+.num {
+  align-items: center;
 }

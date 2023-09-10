@@ -23,7 +23,7 @@ export function drawMPC() {
   // Create a 4x3 grid of drum pads
   const mpcContainer = document.createElement("div");
   mpcContainer.classList.add("mpc-container");
-  document.body.appendChild(mpcContainer);
+  document.querySelector(".main").appendChild(mpcContainer);
 
   // Fetch data from JSON Server API
   const apiUrl = "http://localhost:3000/sounds";
