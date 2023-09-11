@@ -44,3 +44,6 @@
 .num {
   align-items: center;
 }
+.step-selected {
+  border: 2px solid black;
+}
