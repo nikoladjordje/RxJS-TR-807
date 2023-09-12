@@ -47,3 +47,9 @@
 .step-selected {
   border: 2px solid black;
 }
+.start-btn {
+  height: 30px;
+}
+.stop-btn {
+  height: 30px;
+}
