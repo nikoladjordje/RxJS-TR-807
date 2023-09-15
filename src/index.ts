@@ -1,5 +1,6 @@
 import { drawMPC } from "./MPC";
-import { drawSequencer } from "./TR808";
+import { drawPlayPauseButtons, drawSequencer } from "./TR808";
 
 drawMPC();
-drawSequencer();
+drawPlayPauseButtons();
+drawSequencer(9);
