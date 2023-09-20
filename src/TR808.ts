@@ -10,6 +10,7 @@ import {
   switchMap,
   takeUntil,
 } from "rxjs";
+import { apiUrl } from "./Constants";
 // Create an array to track the steps
 let stepStates = new Array(16).fill(false);
 
@@ -62,7 +63,7 @@ selectBox.classList.add("select-box");
 selectBox.addEventListener("change", function () {
   const selectedNumber = parseInt(selectBox.value);
   drawSequencer(selectedNumber);
-  // alert(`You selected the number: ${selectedNumber}`);
+  console.log(`You selected the number: ${selectedNumber}`);
 });
 btns.appendChild(selectBox);
 // Create observables for button clicks
@@ -94,8 +95,9 @@ const audioElements: { name: string; id: number; audio: HTMLAudioElement }[] =
 
 // Create a function to play a sound by ID
 function playSoundById(id: number) {
-  // const audio = audioElements.find((element) => element.id === id)?.audio;
   const audio = audioElements.find((element) => element.id === id)?.audio;
+  console.log(audioElements.find((element) => element.id === id)?.name);
+
   if (audio) {
     audio.currentTime = 0;
     audio.volume = 0.5;
@@ -136,7 +138,7 @@ function createAudioElement(soundPath: string): HTMLAudioElement {
 }
 
 // Fetch data from JSON Server API
-const apiUrl = "http://localhost:3000/sounds";
+// const apiUrl = "http://localhost:3000/sounds";
 fetch(apiUrl)
   .then((response) => response.json())
   .then((data) => {

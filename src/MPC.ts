@@ -1,4 +1,5 @@
 import { filter, forkJoin, from, fromEvent, map, mergeMap } from "rxjs";
+import { apiUrl } from "./Constants";
 
 export function drawMPC() {
   // Define a function to create an audio element for each sound
@@ -9,11 +10,14 @@ export function drawMPC() {
   }
 
   // Create an array to store the audio elements for each sound
-  const audioElements: { id: number; audio: HTMLAudioElement }[] = [];
+  const audioElements: { name: string; id: number; audio: HTMLAudioElement }[] =
+    [];
 
   // Create a function to play a sound by ID
   function playSoundById(id: number) {
     const audio = audioElements.find((element) => element.id === id)?.audio;
+    console.log(audioElements.find((element) => element.id === id)?.name);
+
     if (audio) {
       audio.currentTime = 0;
       audio.play();
@@ -26,13 +30,13 @@ export function drawMPC() {
   document.querySelector(".main").appendChild(mpcContainer);
 
   // Fetch data from JSON Server API
-  const apiUrl = "http://localhost:3000/sounds";
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
       // Populate the audioElements array with audio elements
       audioElements.push(
         ...data.map((sound: any) => ({
+          name: sound.name,
           id: sound.id,
           audio: createAudioElement(`/assets/sounds/${sound.soundPath}`), // Update the URL
         }))
@@ -204,41 +208,3 @@ export function drawMPC() {
     playSoundById(soundId);
   });
 }
-
-// const drumPadLabels = [
-//   "Kick",
-//   "Closedhat",
-//   "Openhat1",
-//   "Openhat2",
-//   "Rimshot",
-//   "Snare1",
-//   "Snare2",
-//   "Clap",
-//   "LowTom",
-//   "MidTom",
-//   "HiTom",
-//   "Cowbell",
-// ];
-
-// function createDrumPad(label: string): HTMLDivElement {
-//   const pad = document.createElement("div");
-//   pad.classList.add("drum-pad");
-//   pad.textContent = label;
-//   pad.addEventListener("click", () => playSound(label));
-//   return pad;
-// }
-
-// export function drawMPC() {
-//   const mpcContainer = document.querySelector(".MPC");
-//   if (mpcContainer) {
-//     drumPadLabels.forEach((label) => {
-//       const pad = createDrumPad(label);
-//       mpcContainer.appendChild(pad);
-//     });
-//   }
-// }
-
-// const zKey$ = fromEvent(document, "keydown").pipe(
-//   filter((event: KeyboardEvent) => event.key === "z"),
-//   map(() => kickSound)
-// );
