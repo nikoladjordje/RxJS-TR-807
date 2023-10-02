@@ -98,6 +98,13 @@ function playSoundById(id: number) {
   const audio = audioElements.find((element) => element.id === id)?.audio;
   console.log(audioElements.find((element) => element.id === id)?.name);
 
+  // const step = document.querySelector(".step-" + id).classList.add("stepper");
+  // console.log(step);
+
+  // setTimeout(() => {
+  //   document.querySelector(".step-" + id).classList.remove("stepper");
+  // }, 100);
+
   if (audio) {
     audio.currentTime = 0;
     audio.volume = 0.5;
@@ -108,6 +115,7 @@ function playSoundById(id: number) {
 intervalControl$.subscribe(
   (value) => {
     console.log(`Interval value: ${value}`);
+
     // if (stepStates[value]) playSoundById(idSelect);
     if (stepKickStates[value]) playSoundById(9);
     if (stepClosedHatStates[value]) playSoundById(10);
@@ -121,6 +129,11 @@ intervalControl$.subscribe(
     if (stepMidTomStates[value]) playSoundById(2);
     if (stepHiTomStates[value]) playSoundById(3);
     if (stepCowbellStates[value]) playSoundById(4);
+    document.querySelector(".step-" + value).classList.add("stepper");
+
+    setTimeout(() => {
+      document.querySelector(".step-" + value).classList.remove("stepper");
+    }, 100);
     // console.log(stepStates);
   }
   // ,

@@ -1,4 +1,14 @@
-import { filter, forkJoin, from, fromEvent, map, mergeMap } from "rxjs";
+import {
+  EMPTY,
+  filter,
+  forkJoin,
+  from,
+  fromEvent,
+  map,
+  merge,
+  mergeMap,
+  of,
+} from "rxjs";
 import { apiUrl } from "./Constants";
 
 export function drawMPC() {
@@ -46,6 +56,7 @@ export function drawMPC() {
       for (const sound of data) {
         const pad = document.createElement("div");
         pad.classList.add("drum-pad");
+        pad.classList.add("drum-pad-" + sound.id);
         pad.textContent = sound.name;
         pad.addEventListener("click", () => playSoundById(sound.id));
         mpcContainer.appendChild(pad);
@@ -56,21 +67,54 @@ export function drawMPC() {
     });
   console.log(audioElements);
 
-  // Create an observable for the "Q" key press
+  // const keyPressObservable = fromEvent<KeyboardEvent>(document, "keydown").pipe(
+  //   map((event) => event.key.toUpperCase()),
+  //   mergeMap((key) => {
+  //     switch (key) {
+  //       case "Q":
+  //         return of(9);
+  //       case "W":
+  //         return of(10);
+  //       case "E":
+  //         return of(11);
+  //       case "R":
+  //         return of(12);
+  //       case "A":
+  //         return of(5);
+  //       case "S":
+  //         return of(6);
+  //       case "D":
+  //         return of(7);
+  //       case "F":
+  //         return of(8);
+  //       case "Z":
+  //         return of(1);
+  //       case "X":
+  //         return of(2);
+  //       case "C":
+  //         return of(3);
+  //       case "V":
+  //         return of(4);
+  //       default:
+  //         return EMPTY;
+  //     }
+  //   }),
+  //   filter((soundId) => soundId !== null)
+  // );
+
+  // keyPressObservable.subscribe((soundId) => {
+  //   playSoundById(soundId);
+  // });
+
+  // Create observables for the key presses and map them to sound IDs
   const qKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
   ).pipe(
-    filter((event) => event.key.toUpperCase() === "Q"), // Filter for the "Q" key
-    map(() => 9) // Map it to the ID of the "Kick" sound
+    filter((event) => event.key.toUpperCase() === "Q"),
+    map(() => 9)
   );
 
-  // Subscribe to the "Q" key press observable and play the "Kick" sound
-  qKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-
-  // Create an observable for the "W" key press
   const wKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -79,11 +123,6 @@ export function drawMPC() {
     map(() => 10)
   );
 
-  wKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-
-  // Create an observable for the "E" key press
   const eKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -92,11 +131,6 @@ export function drawMPC() {
     map(() => 11)
   );
 
-  eKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-
-  // Create an observable for the "R" key press
   const rKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -105,10 +139,6 @@ export function drawMPC() {
     map(() => 12)
   );
 
-  rKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-  // Create an observable for the "A" key press
   const aKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -117,11 +147,6 @@ export function drawMPC() {
     map(() => 5)
   );
 
-  aKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-
-  // Create an observable for the "S" key press
   const sKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -130,10 +155,6 @@ export function drawMPC() {
     map(() => 6)
   );
 
-  sKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-  // Create an observable for the "D" key press
   const dKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -142,11 +163,6 @@ export function drawMPC() {
     map(() => 7)
   );
 
-  dKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-
-  // Create an observable for the "f" key press
   const fKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -155,10 +171,6 @@ export function drawMPC() {
     map(() => 8)
   );
 
-  fKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-  // Create an observable for the "Z" key press
   const zKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -167,11 +179,6 @@ export function drawMPC() {
     map(() => 1)
   );
 
-  zKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-
-  // Create an observable for the "X" key press
   const xKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -180,10 +187,6 @@ export function drawMPC() {
     map(() => 2)
   );
 
-  xKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-  // Create an observable for the "C" key press
   const cKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -192,10 +195,6 @@ export function drawMPC() {
     map(() => 3)
   );
 
-  cKeyPressObservable.subscribe((soundId) => {
-    playSoundById(soundId);
-  });
-  // Create an observable for the "V" key press
   const vKeyPressObservable = fromEvent<KeyboardEvent>(
     document,
     "keydown"
@@ -204,7 +203,32 @@ export function drawMPC() {
     map(() => 4)
   );
 
-  vKeyPressObservable.subscribe((soundId) => {
+  // Merge all of these observables into one
+  const mergedObservable = merge(
+    qKeyPressObservable,
+    wKeyPressObservable,
+    eKeyPressObservable,
+    rKeyPressObservable,
+    aKeyPressObservable,
+    sKeyPressObservable,
+    dKeyPressObservable,
+    fKeyPressObservable,
+    zKeyPressObservable,
+    xKeyPressObservable,
+    cKeyPressObservable,
+    vKeyPressObservable
+  );
+
+  // Subscribe to the merged observable and play the sound
+  mergedObservable.subscribe((soundId) => {
     playSoundById(soundId);
+    document.querySelector(".drum-pad-" + soundId).classList.add("clicked");
+
+    // Remove the clicked class after a short delay (e.g., 200 milliseconds)
+    setTimeout(() => {
+      document
+        .querySelector(".drum-pad-" + soundId)
+        .classList.remove("clicked");
+    }, 200);
   });
 }

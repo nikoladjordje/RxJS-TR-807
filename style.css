@@ -53,3 +53,33 @@
 .stop-btn {
   height: 30px;
 }
+.clicked {
+  animation: key-press-animation 0.2s ease;
+}
+@keyframes key-press-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.stepper {
+  animation: stepper-animation 0.1s ease;
+}
+
+@keyframes stepper-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
